@@ -1,0 +1,44 @@
+.header {
+text-align: center;
+}
+.results {
+text-align: center;
+margin-top: 150px;
+}
+.information {text-align: center;}
+
+.forms {margin-top: 100px;}
+
+.registrationNumber {text-transform: uppercase;}
+
+.reset {float: right}
+.search {float: right}
+
+button {margin-top: 25px;}
+
+.fa, .fas {
+
+  padding-right: 10px;
+
+
+}
+
+.plate {
+  display: block;
+  width:450px;
+  height: 100px;
+  background-color: #fff;
+  box-shadow: 10px 10px 5px #888888;
+  border: 5px solid;
+  border-radius: 20px;
+  margin: 10px 10px;
+}
+
+.number {
+  text-align: center;
+  padding: 7px 50px 50px 50px;
+  color: #000000;
+  font-family: Trebuchet MS;
+  font-size: 47px;
+  font-weight: bold;
+}

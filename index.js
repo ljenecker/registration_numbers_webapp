@@ -1,14 +1,14 @@
 const express = require('express');
-// const flash = require('express-flash');
-// const session = require('express-session');
+const flash = require('express-flash');
+const session = require('express-session');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const pg = require('pg');
 const app = express();
 const Pool = pg.Pool;
 
-// const Users = require('./routes/users');
-// const UsersService = require('./services/users-service');
+const Registration = require('./routes/registration');
+const RegistrationService = require('./services/registration-service');
 
 // should we use a SSL connection
 let useSSL = false;
@@ -17,24 +17,24 @@ if (process.env.DATABASE_URL && !local) {
     useSSL = true;
 }
 // which db connection to use
-const connectionString = process.env.DATABASE_URL || 'postgresql://lorenzo:123@localhost:5432/registration_numbers_app_tests';
+const connectionString = process.env.DATABASE_URL || 'postgresql://lorenzo:123@localhost:5432/registration_numbers_app';
 
 const pool = new Pool({
     connectionString,
     ssl: useSSL
 });
 
-// const usersService = UsersService(pool);
-// const usersRoutes = Users(usersService);
+const registrationService = RegistrationService(pool);
+const registrationRoutes = Registration(registrationService);
 
-// app.use(session({
-//     secret: 'abc123',
-//     resave: false,
-//     saveUninitialized: true
-// }));
+app.use(session({
+    secret: 'abc123',
+    resave: false,
+    saveUninitialized: true
+}));
 
-// initialise the flash middleware
-// app.use(flash());
+//initialise the flash middleware
+app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
@@ -47,11 +47,7 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-// app.get('/', usersRoutes.counter);
-// app.post('/greetme/add', usersRoutes.add);
-// app.post('/greetme/reset', usersRoutes.reset);
-// app.post('/greetme/showAll', usersRoutes.showAll);
-// app.get('/greetme/:id', usersRoutes.showById);
+app.get('/', registrationRoutes.show);
 
 const PORT = process.env.PORT || 3007;
 

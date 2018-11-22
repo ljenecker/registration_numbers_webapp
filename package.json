@@ -14,9 +14,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-flash": "0.0.2",
     "express-handlebars": "^3.0.0",
-    "pg": "^7.6.1"
+    "express-session": "^1.15.6",
+    "express-static": "^1.2.6",
+    "handlebars": "^4.0.12",
+    "pg": "^7.6.0"
   },
   "devDependencies": {
     "eslint": "^5.9.0",

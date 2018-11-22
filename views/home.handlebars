@@ -1,0 +1,90 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-12 header'>
+      <h1>Registration Number Web Application</h1>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-12 col-lg-6 mx-auto'>
+      <p class='information'>Important Information</p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Code</th>
+            <th scope="col">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#towns}}
+            <tr>
+              <th scope="row">  {{id}}</th>
+              <td>  {{code}}</td>
+              <td>  {{location}}</td>
+            </tr>
+          {{/towns}}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  <div class='row forms'>
+    <div class='col-12 col-lg-6'>
+      <p>Please insert registration number: <input class="form-control registrationNumber" type="text" placeholder="CA 123-456"></p>
+      <button type="button" class="btn btn-primary submit btn-lg"><i class="fas fa-arrow-right"></i>Submit</button>
+      <button type="button" class="btn btn-danger reset btn-lg"><i class="fas fa-redo"></i>Reset</button>
+    </div>
+
+    <div class='col-12 col-lg-6'>
+      <p>Please select a location:
+        <select class="form-control">
+          <option>ALL</option>
+          {{#towns}}
+            <option>{{location}}</option>
+          {{/towns}}
+        </select>
+      </p>
+      <button type="button" class="btn btn-success search btn-lg"><i class="fas fa-search-location"></i>Search</button>
+    </div>
+
+    <!-- <div class='col-4'>
+      <p>Important Information
+        <select class="form-control">
+          <option>ALL</option>
+        </select>
+      </p>
+    </div> -->
+  </div>
+
+  <div class='row'>
+    <div class='col-12 results'>
+      <h2>Results</h2>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-12 col-md-12 col-lg-6'>
+      <div class="plate">
+        <div class="number">
+          CA 123-456
+        </div>
+      </div>
+    </div>
+
+    <div class='col-12 col-md-12 col-lg-6'>
+      <div class="plate">
+        <div class="number">
+          1789-123 GP
+        </div>
+      </div>
+    </div>
+
+    <div class='col-12 col-md-12 col-lg-6'>
+      <div class="plate">
+        <div class="number">
+          456-789 NW
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
