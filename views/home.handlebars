@@ -4,10 +4,11 @@
       <h1>Registration Number Web Application</h1>
     </div>
   </div>
+
   <div class='row'>
-    <div class='col-12 col-lg-6 mx-auto'>
+    <div class='col-12 col-lg-6 mx-auto informationSection'>
       <p class='information'>Important Information</p>
-      <table class="table table-striped">
+      <table id="example" class="table table-striped table-bordered">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -18,25 +19,27 @@
         <tbody>
           {{#towns}}
             <tr>
-              <th scope="row">  {{id}}</th>
-              <td>  {{code}}</td>
-              <td>  {{location}}</td>
+              <th scope="row"> {{@index}}</th>
+              <td> {{code}}</td>
+              <td> {{location}}</td>
             </tr>
           {{/towns}}
         </tbody>
       </table>
-
     </div>
   </div>
-  <div class='row forms'>
-    <div class='col-12 col-lg-6'>
-      <p>Please insert registration number: <input class="form-control registrationNumber" type="text" placeholder="CA 123-456"></p>
+
+
+  <div class='row'>
+
+    <div class='col-12 col-md-4 mx-auto regInsert'>
+      <p>Insert registration number: <input class="form-control registrationNumber" type="text" placeholder="CA 123-456"></p>
       <button type="button" class="btn btn-primary submit btn-lg"><i class="fas fa-arrow-right"></i>Submit</button>
       <button type="button" class="btn btn-danger reset btn-lg"><i class="fas fa-redo"></i>Reset</button>
     </div>
 
-    <div class='col-12 col-lg-6'>
-      <p>Please select a location:
+    <div class='col-12 col-md-4 mx-auto townFilter'>
+      <p>Filter by location:
         <select class="form-control">
           <option>ALL</option>
           {{#towns}}
@@ -47,14 +50,17 @@
       <button type="button" class="btn btn-success search btn-lg"><i class="fas fa-search-location"></i>Search</button>
     </div>
 
-    <!-- <div class='col-4'>
-      <p>Important Information
-        <select class="form-control">
-          <option>ALL</option>
-        </select>
-      </p>
-    </div> -->
+
+
+
   </div>
+
+
+
+
+
+
+
 
   <div class='row'>
     <div class='col-12 results'>
@@ -63,7 +69,7 @@
   </div>
 
   <div class='row'>
-    <div class='col-12 col-md-12 col-lg-6'>
+    <div class='col-12 col-md-6 col-lg-4'>
       <div class="plate">
         <div class="number">
           CA 123-456
@@ -71,15 +77,15 @@
       </div>
     </div>
 
-    <div class='col-12 col-md-12 col-lg-6'>
+    <div class='col-12 col-md-6 col-lg-4'>
       <div class="plate">
         <div class="number">
-          1789-123 GP
+          789-123 GP
         </div>
       </div>
     </div>
 
-    <div class='col-12 col-md-12 col-lg-6'>
+    <div class='col-12 col-md-6 col-lg-4'>
       <div class="plate">
         <div class="number">
           456-789 NW
