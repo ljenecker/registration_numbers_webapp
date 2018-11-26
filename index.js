@@ -48,6 +48,7 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 app.get('/', registrationRoutes.show);
+app.post('/registration/add', registrationRoutes.regAdd);
 
 const PORT = process.env.PORT || 3007;
 

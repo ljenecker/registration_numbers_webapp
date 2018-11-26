@@ -8,12 +8,13 @@
   <div class='row'>
     <div class='col-12 col-lg-6 mx-auto informationSection'>
       <p class='information'>Important Information</p>
-      <table id="example" class="table table-striped table-bordered">
+      <table id="example" class="table table-striped table-bordered table-editable">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Code</th>
             <th scope="col">Location</th>
+            <th scope="col">Edit/Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -21,8 +22,31 @@
             <tr>
               <th scope="row"> {{@index}}</th>
               <td> {{code}}</td>
-              <td> {{location}}</td>
+              <td id="edit{{@index}}" onblur="editLocation({{@index}})" contenteditable="true"> {{location}}</td>
+              <td><i class="fas fa-edit" onclick="selectText({{@index}})"></i><i id="trash" class="fas fa-trash-alt" data-toggle="modal" data-target="#exampleModal{{@index}}"></i></td>
             </tr>
+            <div class="modal fade" id="exampleModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    You are about to delete the town {{location}}, this procedure is irreversible.
+                    Do you want to proceed?
+                  </div>
+                  <div class="modal-footer">
+                    <form method="POST" action="/registration/delete:{{id}}">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           {{/towns}}
         </tbody>
       </table>
@@ -33,34 +57,32 @@
   <div class='row'>
 
     <div class='col-12 col-md-4 mx-auto regInsert'>
-      <p>Insert registration number: <input class="form-control registrationNumber" type="text" placeholder="CA 123-456"></p>
-      <button type="button" class="btn btn-primary submit btn-lg"><i class="fas fa-arrow-right"></i>Submit</button>
-      <button type="button" class="btn btn-danger reset btn-lg"><i class="fas fa-redo"></i>Reset</button>
+      <form method="post" action="/registration/add">
+        <p>Insert registration number:
+          <input class="form-control registrationNumber" name="registrationNumber" id="registrationNumber" type="text" onKeyUp="checkRegInput()" placeholder="CA 123-456" >
+        </p>
+      <button type="submit" class="btn btn-primary submit btn-lg"><i class="fas fa-arrow-right"></i>Submit</button>
+      </form>
+      <form method="post" action="/registration/reset">
+          <button type="submit" class="btn btn-danger reset btn-lg"><i class="fas fa-redo"></i>Reset</button>
+      </form>
     </div>
 
     <div class='col-12 col-md-4 mx-auto townFilter'>
-      <p>Filter by location:
-        <select class="form-control">
-          <option>ALL</option>
-          {{#towns}}
-            <option>{{location}}</option>
-          {{/towns}}
-        </select>
-      </p>
-      <button type="button" class="btn btn-success search btn-lg"><i class="fas fa-search-location"></i>Search</button>
+      <form method="post" action="/registration/filter">
+        <p>Filter by location:
+          <select class="form-control">
+            <option>ALL</option>
+            {{#towns}}
+              <option>{{location}}</option>
+            {{/towns}}
+          </select>
+        </p>
+        <button type="button" class="btn btn-success search btn-lg"><i class="fas fa-search-location"></i>Search</button>
+      </form>
     </div>
 
-
-
-
   </div>
-
-
-
-
-
-
-
 
   <div class='row'>
     <div class='col-12 results'>

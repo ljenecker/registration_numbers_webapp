@@ -1,33 +1,77 @@
 .header {
-text-align: center;
+  text-align: center;
 }
+
 .results {
-text-align: center;
-margin-top: 150px;
+  text-align: center;
+  margin-top: 150px;
 }
-.information {text-align: center; font-weight: bold;}
-.informationSection {padding-bottom: 50px;}
-.regInsert {font-weight: bold; padding-bottom: 50px;}
-.townFilter {font-weight: bold; padding-bottom: 50px;}
-.forms {margin-top: 100px;}
 
-.registrationNumber {text-transform: uppercase;}
+.information {
+  text-align: center;
+  font-weight: bold;
+}
 
-.reset {float: right}
-.search {}
+.informationSection {
+  padding-bottom: 50px;
+}
 
-button {margin-top: 25px;}
+.regInsert {
+  font-weight: bold;
+  padding-bottom: 50px;
+}
+
+.townFilter {
+  font-weight: bold;
+  padding-bottom: 50px;
+}
+
+.forms {
+  margin-top: 100px;
+}
+
+.registrationNumber {
+  text-transform: uppercase;
+}
+
+/* /////////main buttons///////// */
+
+.reset {
+  float: right
+}
+
+.submit {
+  float: left
+}
+
+
+button {
+  margin-top: 25px;
+}
 
 .fa, .fas {
+  padding: 0px 15px;
+}
 
-  padding-right: 10px;
+.informationSection .fas {
+  padding: 0px 15%;
+}
 
 
+
+.fa-edit:hover {
+  cursor: pointer;
+  color: #28a745;
+}
+
+.fa-trash-alt:hover {
+  cursor: pointer;
+  color: #dc3545;
 }
 
 .plate {
   display: block;
-  width:100%;
+  width: 100%;
   height: 100px;
   background-color: #fff;
   box-shadow: 10px 10px 5px #888888;
