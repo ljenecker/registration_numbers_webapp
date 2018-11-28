@@ -1,7 +1,6 @@
 INSERT INTO towns (code, location)
 VALUES
- ('CA','Western Cape'),
- ('CAM','Cape Town'),
+ ('CA','Cape Town'),
  ('CAR','Clanwilliam & Lamberts Bay'),
  ('CAW','George'),
  ('CBL','Ladismith'),

@@ -55,6 +55,12 @@ module.exports = function RegistrationNumberService (pool) {
         return towns;
     }
 
+    async function getRegistrationNumbersByTown (code) {
+        let townsResult = await pool.query('SELECT * FROM registration_numbers WHERE registration_number_area = $1', [code]);
+        let towns = townsResult.rows;
+        return towns;
+    }
+
     async function getRegistrationNumbers () {
         let townsResult = await pool.query('SELECT * FROM registration_numbers');
         let towns = townsResult.rows;
@@ -67,8 +73,8 @@ module.exports = function RegistrationNumberService (pool) {
             registrationNumber.registration_number
         ];
 
-        if(!registrationNumber.registration_number_area) { return 'Unable to add registration number - NO TOWN CODE SUPPLIED'; }
-        if(!registrationNumber.registration_number) { return 'Unable to add registration number - NO REG NUMBER SUPPLIED'; }
+        if (!registrationNumber.registration_number_area) { return 'Unable to add registration number - NO TOWN CODE SUPPLIED'; }
+        if (!registrationNumber.registration_number) { return 'Unable to add registration number - NO REG NUMBER SUPPLIED'; }
         let town = await getTownByCode(registrationNumber.registration_number_area);
         if (!town) { return 'Unable to add registration number - NO TOWN CODE FOUND'; }
 
@@ -95,6 +101,7 @@ module.exports = function RegistrationNumberService (pool) {
         deleteTownByCode,
         getRegistrationNumber,
         getRegistrationNumberById,
+        getRegistrationNumbersByTown,
         getRegistrationNumbers,
         createRegistrationNumber,
         deleteRegistrationNumber,

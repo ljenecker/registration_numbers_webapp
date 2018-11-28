@@ -171,6 +171,30 @@ describe('The basic registration number web app', function () {
         assert.equal(2, registrationNumberResults.length);
     });
 
+    it('should be able to get all registration numbers by town code', async function () {
+        let registrationNumberService = RegistrationNumberService(pool);
+
+        await registrationNumberService.createTown({
+            code: 'CA',
+            location: 'Cape Town'
+        });
+
+        await registrationNumberService.createRegistrationNumber({
+            registration_number_area: 'CA',
+            registration_number: 123456
+        });
+
+        await registrationNumberService.createRegistrationNumber({
+            registration_number_area: 'CA',
+            registration_number: 789123
+        });
+
+        let registrationNumberResults = await registrationNumberService.getRegistrationNumbersByTown('CA');
+
+        assert.equal(2, registrationNumberResults.length);
+    });
+
+
     it('should be able to add a registration number', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 

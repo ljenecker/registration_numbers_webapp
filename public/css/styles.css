@@ -49,6 +49,15 @@ button {
   margin-top: 25px;
 }
 
+.hide {
+display: none;
+}
+
+.show {
+display: block;
+}
+
+
 .fa, .fas {
   padding: 0px 15px;
 }
