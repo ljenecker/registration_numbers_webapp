@@ -22,7 +22,16 @@
             <tr>
               <th scope="row">{{@index}}</th>
               <td> {{code}}</td>
-              <td id="edit{{@index}}" onblur="editLocation({{@index}})" contenteditable="true"> {{location}}</td>
+
+
+
+              <form method="POST" action="/registration/edit?town={{id}}" id='form{{@index}}'>
+                  <td id="edit{{@index}}" onblur="editLocation({{@index}})" contenteditable="true"> {{location}}</td>
+                  <input type="hidden" class="form-control townLocation" name="townLocation" id="townLocation{{@index}}" value="{{location}}">
+              </form>
+
+
+
               <td><i class="fas fa-edit" onclick="selectText({{@index}})"></i><i id="trash" class="fas fa-trash-alt" data-toggle="modal" data-target="#exampleModal{{@index}}"></i></td>
             </tr>
             <div class="modal fade" id="exampleModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,7 +48,7 @@
                     Do you want to proceed?
                   </div>
                   <div class="modal-footer">
-                    <form method="POST" action="/registration/delete:{{id}}">
+                    <form method="POST" action="/registration/delete?town={{id}}">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
@@ -109,6 +118,30 @@
     </div>
 
   </div>
+
+
+  {{#if messages.notificationDanger}}
+    <div class='row'>
+      <div class='col-12'>
+        <p class='notificationDanger alert alert-danger'>
+          {{messages.notificationDanger}}
+        </p>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if messages.notificationSuccess}}
+    <div class='row'>
+      <div class='col-12'>
+        <p class='notificationSuccess alert alert-success'>
+          {{messages.notificationSuccess}}
+        </p>
+      </div>
+    </div>
+  {{/if}}
+
+
+
   {{#if registrationNumbers}}
   <div class='row'>
     <div class='col-12 results'>
@@ -119,7 +152,6 @@
 
 
   <div class='row'>
-
     {{#registrationNumbers}}
       <div class='col-12 col-md-6 col-lg-4'>
         <div class="plate">
@@ -131,4 +163,5 @@
     {{/registrationNumbers}}
 
   </div>
+
 </div>

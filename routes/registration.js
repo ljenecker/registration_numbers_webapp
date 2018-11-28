@@ -38,6 +38,10 @@ module.exports = function (registrationService) {
                     registration_number_area: registrationNumberCode,
                     registration_number: registrationNumber
                 });
+
+                if (typeof (registrationNumberResults) === 'string') {
+                    req.flash('notificationDanger', registrationNumberResults);
+                }
             }
 
             if (registrationNumberStart.match(/C[A-Z]\s/)) {
@@ -47,6 +51,10 @@ module.exports = function (registrationService) {
                     registration_number_area: registrationNumberCode,
                     registration_number: registrationNumber
                 });
+
+                if (typeof (registrationNumberResults) === 'string') {
+                    req.flash('notificationDanger', registrationNumberResults);
+                }
             }
 
             res.redirect('/');
@@ -78,10 +86,39 @@ module.exports = function (registrationService) {
         }
     };
 
+    async function townDelete (req, res, next) {
+        try {
+            let townCode = req.query.town;
+            await registrationService.deleteTownById(townCode);
+            req.flash('notificationSuccess', 'Town Successfull deleted!');
+            res.redirect('/');
+        } catch (err) {
+            next(err);
+        }
+    };
+
+    async function townEdit (req, res, next) {
+        try {
+            let townCode = req.query.town;
+            let townLocation = req.body.townLocation;
+
+            await registrationService.updateTown({
+                location: townLocation,
+                id: townCode
+            });
+            req.flash('notificationSuccess', 'Town Location Successfull Changed!');
+            res.redirect('/');
+        } catch (err) {
+            next(err);
+        }
+    };
+
     return {
         show,
         regAdd,
         regFilter,
-        regReset
+        regReset,
+        townEdit,
+        townDelete
     };
 };

@@ -3,8 +3,13 @@ function selectText(id) {
 }
 
 function editLocation(id) {
-    var previousLocation = document.getElementById('edit' + id).innerHTML;
-    alert('Successfully changed to' + previousLocation);
+    var currentLocation = document.getElementById('edit' + id).innerHTML;
+    var hiddenInput = document.getElementById('townLocation' + id);
+
+    hiddenInput.value = currentLocation;
+
+    document.getElementById("form" + id).submit();
+    // alert('Successfully changed to' + previousLocation);
 }
 
 function checkRegInput() {

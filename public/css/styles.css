@@ -49,6 +49,16 @@ button {
   margin-top: 25px;
 }
 
+.notificationDanger{
+text-align: center;
+
+}
+.notificationSuccess{
+text-align: center;
+
+}
+
+
 .hide {
 display: none;
 }

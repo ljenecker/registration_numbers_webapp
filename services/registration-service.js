@@ -12,7 +12,7 @@ module.exports = function RegistrationNumberService (pool) {
     }
 
     async function getTowns () {
-        let townsResult = await pool.query('SELECT * FROM towns');
+        let townsResult = await pool.query('SELECT * FROM towns ORDER BY location ASC;');
         return townsResult.rows;
     }
 
