@@ -1,18 +1,18 @@
-function selectText(id) {
+function selectText (id) {
     document.getElementById('edit' + id).focus();
 }
 
-function editLocation(id) {
+function editLocation (id) {
     var currentLocation = document.getElementById('edit' + id).innerHTML;
     var hiddenInput = document.getElementById('townLocation' + id);
 
     hiddenInput.value = currentLocation;
 
-    document.getElementById("form" + id).submit();
+    document.getElementById('form' + id).submit();
     // alert('Successfully changed to' + previousLocation);
 }
 
-function checkRegInput() {
+function checkRegInput () {
     var registrationNumberElemID = document.getElementById('msg');
     var registrationNumberElem = document.getElementById('registrationNumber');
     var registrationNumberFull = registrationNumberElem.value;
@@ -24,14 +24,14 @@ function checkRegInput() {
     registrationNumberElemID.classList.remove('hide');
     registrationNumberElem.classList.add('is-invalid');
     registrationNumberElem.classList.remove('is-valid');
-
+    document.getElementById('submit').disabled = true;
 
     if (registrationNumberFull.match(/C[A-Z]\s[0-9]{3}(-|\s)[0-9]{3}/)) {
         registrationNumberElemID.classList.remove('show');
         registrationNumberElemID.classList.add('hide');
         registrationNumberElem.classList.add('is-valid');
         registrationNumberElem.classList.remove('is-invalid');
-        document.getElementById("submit").disabled = false;
+        document.getElementById('submit').disabled = false;
 
         if (registrationNumberFull.length > 10) {
             registrationNumberElemID.innerHTML = 'Shucks, to many characters in registration number.';
@@ -39,7 +39,7 @@ function checkRegInput() {
             registrationNumberElemID.classList.remove('hide');
             registrationNumberElem.classList.add('is-invalid');
             registrationNumberElem.classList.remove('is-valid');
-            document.getElementById("submit").disabled = true;
+            document.getElementById('submit').disabled = true;
         }
     }
 
@@ -48,7 +48,7 @@ function checkRegInput() {
         registrationNumberElemID.classList.add('hide');
         registrationNumberElem.classList.add('is-valid');
         registrationNumberElem.classList.remove('is-invalid');
-        document.getElementById("submit").disabled = false;
+        document.getElementById('submit').disabled = false;
 
         if (registrationNumberFull.length > 9) {
             registrationNumberElemID.innerHTML = 'Shucks, to many characters in registration number.';
@@ -56,10 +56,7 @@ function checkRegInput() {
             registrationNumberElemID.classList.remove('hide');
             registrationNumberElem.classList.add('is-invalid');
             registrationNumberElem.classList.remove('is-valid');
-            document.getElementById("submit").disabled = true;
+            document.getElementById('submit').disabled = true;
         }
-
     }
-
-
 }

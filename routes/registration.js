@@ -2,6 +2,7 @@ module.exports = function (registrationService) {
     async function show (req, res, next) {
         try {
             let results = await registrationService.getTowns();
+
             let registrationNumberResults = [];
             let registrationNumberCode = req.query.filter;
 
@@ -117,7 +118,7 @@ module.exports = function (registrationService) {
                 location: townLocation,
                 id: townCode
             });
-            req.flash('notificationSuccess', 'Town Location Successfull Changed!');
+            req.flash('notificationSuccess', 'Town Location Successful Changed!');
             res.redirect('/');
         } catch (err) {
             next(err);

@@ -32,12 +32,12 @@ module.exports = function RegistrationNumberService (pool) {
     }
 
     async function deleteTownById (id) {
-
         let registrationNumbersResults = await getRegistrationNumbersByTownId(id);
 
-        if (registrationNumbersResults.length > 0) { return 'Unable to delete town - Registration Numbers linked to it'; }
-        else {return 'Town Successfull deleted!'; }
-
+        if (registrationNumbersResults.length > 0) { return 'Unable to delete town - Registration Numbers linked to it'; } else {
+            await pool.query('DELETE FROM towns WHERE id = $1', [id]);
+            return 'Town Successfully deleted!';
+        }
     }
 
     async function deleteTownByCode (code) {
