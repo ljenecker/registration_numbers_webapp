@@ -32,7 +32,12 @@ module.exports = function RegistrationNumberService (pool) {
     }
 
     async function deleteTownById (id) {
-        return pool.query('DELETE FROM towns WHERE id = $1', [id]);
+
+        let registrationNumbersResults = await getRegistrationNumbersByTownId(id);
+
+        if (registrationNumbersResults.length > 0) { return 'Unable to delete town - Registration Numbers linked to it'; }
+        else {return 'Town Successfull deleted!'; }
+
     }
 
     async function deleteTownByCode (code) {
@@ -52,6 +57,12 @@ module.exports = function RegistrationNumberService (pool) {
     async function getRegistrationNumberById (id) {
         let townsResult = await pool.query('SELECT * FROM registration_numbers WHERE id = $1', [id]);
         let towns = townsResult.rows[0];
+        return towns;
+    }
+
+    async function getRegistrationNumbersByTownId (id) {
+        let townsResult = await pool.query('SELECT * FROM registration_numbers WHERE town_id = $1', [id]);
+        let towns = townsResult.rows;
         return towns;
     }
 
@@ -75,8 +86,12 @@ module.exports = function RegistrationNumberService (pool) {
 
         if (!registrationNumber.registration_number_area) { return 'Unable to add registration number - NO TOWN CODE SUPPLIED'; }
         if (!registrationNumber.registration_number) { return 'Unable to add registration number - NO REG NUMBER SUPPLIED'; }
+
         let town = await getTownByCode(registrationNumber.registration_number_area);
         if (!town) { return 'Unable to add registration number - NO TOWN CODE FOUND'; }
+
+        let registrationNumbersResults = await getRegistrationNumber({ registration_number_area: registrationNumber.registration_number_area, registration_number: registrationNumber.registration_number });
+        if (registrationNumbersResults) { return 'Unable to add registration number - ALREADY EXIST'; }
 
         let results = await pool.query(`insert into registration_numbers(registration_number_area, registration_number, town_id) values ($1, $2, (select id from towns where code = $1)) returning id, registration_number_area, registration_number, town_id`, data);
 
@@ -102,6 +117,7 @@ module.exports = function RegistrationNumberService (pool) {
         getRegistrationNumber,
         getRegistrationNumberById,
         getRegistrationNumbersByTown,
+        getRegistrationNumbersByTownId,
         getRegistrationNumbers,
         createRegistrationNumber,
         deleteRegistrationNumber,

@@ -89,8 +89,8 @@ module.exports = function (registrationService) {
     async function townDelete (req, res, next) {
         try {
             let townCode = req.query.town;
-            await registrationService.deleteTownById(townCode);
-            req.flash('notificationSuccess', 'Town Successfull deleted!');
+            let townDeleteResult = await registrationService.deleteTownById(townCode);
+            req.flash('notificationSuccess', townDeleteResult);
             res.redirect('/');
         } catch (err) {
             next(err);

@@ -92,6 +92,7 @@ describe('The basic registration number web app', function () {
         await registrationNumberService.deleteTownById(town.id);
 
         let updateTown = await registrationNumberService.getTownById(town.id);
+
         assert.equal(null, updateTown);
     });
 
@@ -106,7 +107,26 @@ describe('The basic registration number web app', function () {
         await registrationNumberService.deleteTownByCode(town.code);
 
         let updateTown = await registrationNumberService.getTownById(town.id);
+
         assert.equal(null, updateTown);
+    });
+    
+    it('should NOT be able to delete a town if there are number plates registered to it', async function () {
+        let registrationNumberService = RegistrationNumberService(pool);
+
+        let town = await registrationNumberService.createTown({
+            code: 'CA',
+            location: 'Cape Town'
+        });
+
+        let registrationNumber = await registrationNumberService.createRegistrationNumber({
+            registration_number_area: 'CA',
+            registration_number: 123456
+        });
+
+        let updateTown = await registrationNumberService.deleteTownById(town.id);
+
+        assert.equal('Unable to delete town - Registration Numbers linked to it', updateTown);
     });
 
     it('should be able to get a registration number by id', async function () {
@@ -167,6 +187,29 @@ describe('The basic registration number web app', function () {
         });
 
         let registrationNumberResults = await registrationNumberService.getRegistrationNumbers();
+
+        assert.equal(2, registrationNumberResults.length);
+    });
+
+    it('should be able to get all registration numbers by town code ID', async function () {
+        let registrationNumberService = RegistrationNumberService(pool);
+
+        await registrationNumberService.createTown({
+            code: 'CA',
+            location: 'Cape Town'
+        });
+
+        await registrationNumberService.createRegistrationNumber({
+            registration_number_area: 'CA',
+            registration_number: 123456
+        });
+
+        let registrationNumberCreateResults = await registrationNumberService.createRegistrationNumber({
+            registration_number_area: 'CA',
+            registration_number: 789123
+        });
+
+        let registrationNumberResults = await registrationNumberService.getRegistrationNumbersByTownId(registrationNumberCreateResults.town_id);
 
         assert.equal(2, registrationNumberResults.length);
     });
@@ -258,6 +301,27 @@ describe('The basic registration number web app', function () {
         });
 
         assert.equal('Unable to add registration number - NO TOWN CODE FOUND', registrationNumberResults);
+    });
+
+    it('should NOT be able to add a duplicate registration number', async function () {
+        let registrationNumberService = RegistrationNumberService(pool);
+
+        let town = await registrationNumberService.createTown({
+            code: 'CA',
+            location: 'Cape Town'
+        });
+
+        await registrationNumberService.createRegistrationNumber({
+            registration_number_area: 'CA',
+            registration_number: 123456
+        });
+
+        let registrationNumberResults = await registrationNumberService.createRegistrationNumber({
+            registration_number_area: 'CA',
+            registration_number: 123456
+        });
+
+        assert.equal('Unable to add registration number - ALREADY EXIST', registrationNumberResults);
     });
 
     it('should be able to delete a registration number by id', async function () {

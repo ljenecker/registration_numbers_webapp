@@ -1,10 +1,14 @@
+.container {
+/* max-width:100%; */
+}
+
 .header {
   text-align: center;
 }
 
 .results {
   text-align: center;
-  margin-top: 150px;
+  margin-top: 50px;
 }
 
 .information {
@@ -37,11 +41,15 @@
 /* /////////main buttons///////// */
 
 .reset {
-  float: right
+  display: block;
 }
 
 .submit {
-  float: left
+  display: block;
+}
+
+.search {
+  display: block;
 }
 
 
@@ -72,6 +80,11 @@ display: block;
   padding: 0px 15px;
 }
 
+.informationSection {
+
+  padding-top: 50px;
+}
+
 .informationSection .fas {
   padding: 0px 15%;
 }
@@ -90,20 +103,19 @@ display: block;
 
 .plate {
   display: block;
-  width: 100%;
-  height: 100px;
-  background-color: #fff;
+  width: 300px;
+  height: 50px;
+  background-color: #FFFF00;
   box-shadow: 10px 10px 5px #888888;
   border: 5px solid;
-  border-radius: 20px;
+  border-radius: 10px;
   margin: 10px 10px;
 }
 
 .number {
   text-align: center;
-  padding: 15px 50px 50px 50px;
   color: #000000;
   font-family: Trebuchet MS;
-  font-size: 25pt;
+  font-size: 20pt;
   font-weight: bold;
 }
