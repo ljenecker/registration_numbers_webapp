@@ -33,7 +33,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-//initialise the flash middleware
+// initialise the flash middleware
 app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
@@ -50,9 +50,10 @@ app.set('view engine', 'handlebars');
 app.get('/', registrationRoutes.show);
 app.post('/registration/add', registrationRoutes.regAdd);
 app.post('/registration/filter', registrationRoutes.regFilter);
+app.post('/registration/delete', registrationRoutes.regDelete);
 app.post('/registration/reset', registrationRoutes.regReset);
-app.post('/registration/edit', registrationRoutes.townEdit);
-app.post('/registration/delete', registrationRoutes.townDelete);
+app.post('/town/edit', registrationRoutes.townEdit);
+app.post('/town/delete', registrationRoutes.townDelete);
 
 const PORT = process.env.PORT || 3007;
 

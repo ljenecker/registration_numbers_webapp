@@ -119,3 +119,8 @@ display: block;
   font-size: 20pt;
   font-weight: bold;
 }
+
+.regTrash{
+float: right;
+
+}

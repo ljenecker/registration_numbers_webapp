@@ -77,6 +77,17 @@ module.exports = function (registrationService) {
         }
     };
 
+    async function regDelete (req, res, next) {
+        try {
+            let regId = req.query.reg;
+            let regDeleteResult = await registrationService.deleteRegistrationNumber(regId);
+            req.flash('notificationSuccess', 'Registration Number Successfull Deleted!');
+            res.redirect('/');
+        } catch (err) {
+            next(err);
+        }
+    };
+
     async function regReset (req, res, next) {
         try {
             await registrationService.deleteRegistrationNumbers();
@@ -117,6 +128,7 @@ module.exports = function (registrationService) {
         show,
         regAdd,
         regFilter,
+        regDelete,
         regReset,
         townEdit,
         townDelete

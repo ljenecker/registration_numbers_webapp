@@ -6,7 +6,6 @@
   </div>
 
   <div class='row'>
-
     <div class='col-12 col-md-6 regInsert '>
       <form method="post" action="/registration/add">
         <p>Insert registration number:
@@ -17,7 +16,6 @@
           <button type="submit" id="submit" class="btn btn-primary submit btn-lg mx-auto" disabled><i class="fas fa-arrow-right"></i>Submit</button>
         </div>
       </form>
-
     </div>
 
     <div class='col-12 col-md-6 townFilter'>
@@ -35,14 +33,7 @@
         </div>
       </form>
     </div>
-
-
-
   </div>
-
-
-
-
 
   {{#if messages.notificationDanger}}
     <div class='row'>
@@ -64,8 +55,6 @@
     </div>
   {{/if}}
 
-
-
   {{#if registrationNumbers}}
   <div class='row'>
     <div class='col-12 results'>
@@ -73,7 +62,6 @@
     </div>
   </div>
   {{/if}}
-
 
   <div class='row'>
     {{#registrationNumbers}}
@@ -83,11 +71,32 @@
             {{registration_number_area}} {{registration_number}}
           </div>
         </div>
+        <i class="fas fa-trash-alt regTrash" data-toggle="modal" data-target="#regModal{{@index}}"></i>
+
+        <div class="modal fade" id="regModal{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                You are about to delete the registration number {{registration_number_area}} {{registration_number}}, this procedure is irreversible.
+                Do you want to proceed?
+              </div>
+              <div class="modal-footer">
+                <form method="POST" action="/registration/delete?reg={{id}}">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     {{/registrationNumbers}}
-
-
-
   </div>
 
     <div class='row '>
@@ -118,7 +127,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -140,14 +148,10 @@
                 <th scope="row">{{@index}}</th>
                 <td> {{code}}</td>
 
-
-
-                <form method="POST" action="/registration/edit?town={{id}}" id='form{{@index}}'>
+                <form method="POST" action="/town/edit?town={{id}}" id='form{{@index}}'>
                     <td id="edit{{@index}}" onblur="editLocation({{@index}})" contenteditable="true"> {{location}}</td>
                     <input type="hidden" class="form-control townLocation" name="townLocation" id="townLocation{{@index}}" value="{{location}}">
                 </form>
-
-
 
                 <td><i class="fas fa-edit" onclick="selectText({{@index}})"></i><i id="trash" class="fas fa-trash-alt" data-toggle="modal" data-target="#exampleModal{{@index}}"></i></td>
               </tr>
@@ -165,7 +169,7 @@
                       Do you want to proceed?
                     </div>
                     <div class="modal-footer">
-                      <form method="POST" action="/registration/delete?town={{id}}">
+                      <form method="POST" action="/town/delete?town={{id}}">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Delete</button>
                       </form>
@@ -178,5 +182,4 @@
         </table>
       </div>
     </div>
-
 </div>

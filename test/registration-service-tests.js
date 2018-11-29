@@ -110,7 +110,7 @@ describe('The basic registration number web app', function () {
 
         assert.equal(null, updateTown);
     });
-    
+
     it('should NOT be able to delete a town if there are number plates registered to it', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 
@@ -119,7 +119,7 @@ describe('The basic registration number web app', function () {
             location: 'Cape Town'
         });
 
-        let registrationNumber = await registrationNumberService.createRegistrationNumber({
+        await registrationNumberService.createRegistrationNumber({
             registration_number_area: 'CA',
             registration_number: 123456
         });
@@ -137,7 +137,7 @@ describe('The basic registration number web app', function () {
             location: 'Cape Town'
         });
 
-        let registrationNumber =await registrationNumberService.createRegistrationNumber({
+        let registrationNumber = await registrationNumberService.createRegistrationNumber({
             registration_number_area: 'CA',
             registration_number: 123456
         });
@@ -237,7 +237,6 @@ describe('The basic registration number web app', function () {
         assert.equal(2, registrationNumberResults.length);
     });
 
-
     it('should be able to add a registration number', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 
@@ -257,7 +256,7 @@ describe('The basic registration number web app', function () {
     it('should NOT be able to add a registration number if town prefix is not supplied', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 
-        let town = await registrationNumberService.createTown({
+        await registrationNumberService.createTown({
             code: 'CA',
             location: 'Cape Town'
         });
@@ -273,7 +272,7 @@ describe('The basic registration number web app', function () {
     it('should NOT be able to add a registration number if reg number is not supplied', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 
-        let town = await registrationNumberService.createTown({
+        await registrationNumberService.createTown({
             code: 'CA',
             location: 'Cape Town'
         });
@@ -286,11 +285,10 @@ describe('The basic registration number web app', function () {
         assert.equal('Unable to add registration number - NO REG NUMBER SUPPLIED', registrationNumberResults);
     });
 
-
     it('should NOT be able to add a registration number if town does not exist', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 
-        let town = await registrationNumberService.createTown({
+        await registrationNumberService.createTown({
             code: 'CA',
             location: 'Cape Town'
         });
@@ -306,7 +304,7 @@ describe('The basic registration number web app', function () {
     it('should NOT be able to add a duplicate registration number', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 
-        let town = await registrationNumberService.createTown({
+        await registrationNumberService.createTown({
             code: 'CA',
             location: 'Cape Town'
         });
@@ -327,7 +325,7 @@ describe('The basic registration number web app', function () {
     it('should be able to delete a registration number by id', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 
-        let town = await registrationNumberService.createTown({
+        await registrationNumberService.createTown({
             code: 'CA',
             location: 'Cape Town'
         });
@@ -350,7 +348,7 @@ describe('The basic registration number web app', function () {
     it('should be able to delete all registration numbers', async function () {
         let registrationNumberService = RegistrationNumberService(pool);
 
-        let town = await registrationNumberService.createTown({
+        await registrationNumberService.createTown({
             code: 'CA',
             location: 'Cape Town'
         });
